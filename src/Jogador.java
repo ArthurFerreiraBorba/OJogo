@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Jogador implements Comparable<Jogador> {
     private String nome;
@@ -12,6 +11,15 @@ public class Jogador implements Comparable<Jogador> {
         this.idade = idade;
         this.pontuacao = pontuacao;
         this.numeroTentetivas = numeroTentetivas;
+    }
+    public static boolean jogadorRepetido(ArrayList<Jogador> lista, String nomeJogador) {
+        for (Jogador jogador : lista) {
+            if (nomeJogador.equals(jogador.getNome())) {
+                System.out.println("Já existe um jogador com esse nome");
+                return true;
+            }
+        }
+        return false;
     }
     public static void teste(ArrayList<Jogador> lista) {
         lista.add(new Jogador("Arthur", 18, 1,7));
