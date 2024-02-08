@@ -17,7 +17,14 @@ public class Jogador implements Comparable<Jogador> {
         lista.add(new Jogador("Arthur", 18, 1,7));
         lista.add(new Jogador("João", 49, 9,28));
         lista.add(new Jogador("Mario", 23, 4,17));
-        lista.add(new Jogador("Pedro", 74, 12,23));
+        lista.add(new Jogador("Pedro", 43, 12,23));
+        lista.add(new Jogador("Pablo", 87, 7,10));
+        lista.add(new Jogador("Lucas", 14, 4,9));
+        lista.add(new Jogador("Gustavo", 54, 11,22));
+        lista.add(new Jogador("Gabriel", 58, 3,5));
+        lista.add(new Jogador("Davi", 61, 5,10));
+        lista.add(new Jogador("Luisa", 12, 16,34));
+        lista.add(new Jogador("Jaime", 67, 2,5));
     }
     public void adicionaPonto() {
      this.pontuacao++;

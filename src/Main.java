@@ -10,8 +10,8 @@ public class Main {
 
         Collections.sort(jogadores);
 
-        for (Jogador j: jogadores) {
-            System.out.println(j.pontuacao);
+        for (int i = 0; i < jogadores.size() && i < 10; i++) {
+            System.out.println(jogadores.get(i).getNome() + " - " +(i + 1));
         }
     }
 }
