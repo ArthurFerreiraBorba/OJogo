@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Jogador implements Comparable<Jogador> {
     private String nome;
@@ -6,11 +7,50 @@ public class Jogador implements Comparable<Jogador> {
     public int pontuacao;
     private int numeroTentetivas;
 
+
     public Jogador(String nome,int idade, int pontuacao, int numeroTentetivas) {
         this.nome = nome;
         this.idade = idade;
         this.pontuacao = pontuacao;
         this.numeroTentetivas = numeroTentetivas;
+    }
+    public Jogador(String nome,int idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    public static Jogador criarJogador(ArrayList<Jogador> jogadores, Scanner s) {
+        String nome;
+
+        System.out.println("Digite as informações do jogador");
+        do {
+            System.out.print("nome: ");
+            nome = s.nextLine();
+        } while (Jogador.jogadorRepetido(jogadores, nome));
+        System.out.print("idade: ");
+        int idade = Integer.parseInt(s.nextLine());
+
+        Jogador jogador = new Jogador(nome, idade);
+
+        jogadores.add(jogador);
+        return jogador;
+    }
+    public static Jogador selecionarJogador(ArrayList<Jogador> jogadores, Scanner s) {
+        listarJogadores(jogadores);
+
+        System.out.println("Digite o índice do jogador escolhido: ");
+        int opicao = Integer.parseInt(s.nextLine()) - 1;
+        return jogadores.get(opicao);
+    }
+    public static void listarJogadores(ArrayList<Jogador> jogadores) {
+        for (int i = 0; i < jogadores.size(); i++) {
+            System.out.println((i + 1) + " - " + jogadores.get(i).getNome());
+        }
+    }
+    public static void listarTop10Jogadores(ArrayList<Jogador> jogadores) {
+        for (int i = 0; i < jogadores.size() && i < 10; i++) {
+            System.out.println(jogadores.get(i).getNome() + " - " +(i + 1));
+        }
     }
     public static boolean jogadorRepetido(ArrayList<Jogador> lista, String nomeJogador) {
         for (Jogador jogador : lista) {
