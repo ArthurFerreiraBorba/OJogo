@@ -14,6 +14,7 @@ public class Jogador implements Comparable<Jogador> {
         this.pontuacao = pontuacao;
         this.numeroTentetivas = numeroTentetivas;
     }
+
     public Jogador(String nome,int idade) {
         this.nome = nome;
         this.idade = idade;
@@ -35,13 +36,14 @@ public class Jogador implements Comparable<Jogador> {
         jogadores.add(jogador);
         return jogador;
     }
-    public static Jogador selecionarJogador(ArrayList<Jogador> jogadores, Scanner s) {
-        listarJogadores(jogadores);
+    public static Jogador listarEscolherJogador(ArrayList<Jogador> jogadores, Scanner s) {
+        Jogador.listarJogadores(jogadores);
 
         System.out.println("Digite o índice do jogador escolhido: ");
         int opicao = Integer.parseInt(s.nextLine()) - 1;
         return jogadores.get(opicao);
     }
+
     public static void listarJogadores(ArrayList<Jogador> jogadores) {
         for (int i = 0; i < jogadores.size(); i++) {
             System.out.println((i + 1) + " - " + jogadores.get(i).getNome());
@@ -52,6 +54,7 @@ public class Jogador implements Comparable<Jogador> {
             System.out.println(jogadores.get(i).getNome() + " - " +(i + 1));
         }
     }
+
     public static boolean jogadorRepetido(ArrayList<Jogador> lista, String nomeJogador) {
         for (Jogador jogador : lista) {
             if (nomeJogador.equals(jogador.getNome())) {
@@ -61,6 +64,7 @@ public class Jogador implements Comparable<Jogador> {
         }
         return false;
     }
+
     public static void teste(ArrayList<Jogador> lista) {
         lista.add(new Jogador("Arthur", 18, 1,7));
         lista.add(new Jogador("João", 49, 9,28));
@@ -75,7 +79,7 @@ public class Jogador implements Comparable<Jogador> {
         lista.add(new Jogador("Jaime", 67, 2,5));
     }
     public void adicionaPonto() {
-     this.pontuacao++;
+        this.pontuacao++;
     }
     public void perdePonto() {
         this.pontuacao--;
