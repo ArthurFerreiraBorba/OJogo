@@ -7,7 +7,6 @@ public class Jogador implements Comparable<Jogador> {
     public int pontuacao;
     private int numeroTentetivas;
 
-
     public Jogador(String nome,int idade, int pontuacao, int numeroTentetivas) {
         this.nome = nome;
         this.idade = idade;
@@ -39,9 +38,43 @@ public class Jogador implements Comparable<Jogador> {
     public static Jogador listarEscolherJogador(ArrayList<Jogador> jogadores, Scanner s) {
         Jogador.listarJogadores(jogadores);
 
-        System.out.println("Digite o índice do jogador escolhido: ");
+        System.out.print("Digite o índice do jogador escolhido: ");
         int opicao = Integer.parseInt(s.nextLine()) - 1;
+
+        if (! (opicao < jogadores.size()  && opicao >= 0)) {
+            System.out.println("[ERRO] Opção invalida");
+            return  listarEscolherJogador(jogadores,s);
+        }
         return jogadores.get(opicao);
+    }
+
+    public static Jogador pesquisarJogador(ArrayList<Jogador> jogadores, Scanner s) {
+        System.out.println("(Digite alguma parte do nome do jogador desejado na barra de pesquisa para encontrá-lo)");
+        System.out.print("Barra de pequisa: ");
+        String pesquisa = s.nextLine();
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            System.out.print((jogadores.get(i).nome.toLowerCase().contains(pesquisa.toLowerCase()) ? "\n" + (i + 1) + " - " + jogadores.get(i).nome : ""));
+        }
+
+        System.out.print  ("\nDigite o número da opção: ");
+        int opicao = Integer.parseInt(s.nextLine()) - 1;
+
+        if (! (opicao < jogadores.size()  && opicao >= 0)) {
+            System.out.println("[ERRO] Opção invalida");
+            return  pesquisarJogador(jogadores, s);
+        }
+        return jogadores.get(opicao);
+    }
+
+    public void verStatusJogador(ArrayList<Jogador> jogadores) {
+        System.out.println("----------------------------------");
+        System.out.println("Nome: " + this.nome);
+        System.out.println("Idade: " + this.idade);
+        System.out.println("Posição: " + (jogadores.indexOf(this) + 1));
+        System.out.println("Pontuação: " + this.pontuacao);
+        System.out.println("Número de tentativas: " + this.numeroTentetivas);
+        System.out.println("----------------------------------");
     }
 
     public static void listarJogadores(ArrayList<Jogador> jogadores) {
@@ -88,36 +121,8 @@ public class Jogador implements Comparable<Jogador> {
         this.numeroTentetivas++;
     }
 
-    public int getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao = pontuacao;
-    }
-
-    public int getNumeroTentetivas() {
-        return numeroTentetivas;
-    }
-
-    public void setNumeroTentetivas(int numeroTentetivas) {
-        this.numeroTentetivas = numeroTentetivas;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
     }
 
     @Override
@@ -125,3 +130,4 @@ public class Jogador implements Comparable<Jogador> {
         return Integer.compare(outro.pontuacao, this.pontuacao);
     }
 }
+

@@ -49,7 +49,7 @@ public class Jogo {
                 jogadorSelecionado.adicionaPonto();
             }
 
-            System.out.println("Você escolheu " + respostaJogador + " seu oponente escolheu " + respostaPrograma + resultado);
+            System.out.println("Você escolheu " + respostaJogador + " e seu oponente escolheu " + respostaPrograma + resultado);
         } catch (NullPointerException exp) {
             System.out.println("[ERRO] Nenhum jogador selecionado");
         } catch (Exception exp) {
@@ -62,10 +62,12 @@ public class Jogo {
         System.out.println("1 - Pedra");
         System.out.println("2 - Papel");
         System.out.println("3 - tesoura");
+        System.out.print("Digite o número da opção: ");
         int r = Integer.parseInt(s.nextLine());
 
         if (r < 1 || r > 3) {
             System.out.println("[ERRO] Opção invalida");
+            System.out.println("----------------------------------");
             return escolherOpcaoPPT(s);
         }
         return r;
@@ -79,10 +81,10 @@ public class Jogo {
             Random random = new Random();
             int numeroMagico = random.nextInt(1, tamanho);
 
-            if (numeroMagico(numeroMagico, s)) {
-                jogadorSelecionado.perdePonto();
-            } else {
+            if (descobrirNumeroMagico(numeroMagico, s)) {
                 jogadorSelecionado.adicionaPonto();
+            } else {
+                jogadorSelecionado.perdePonto();
             }
         }catch (NullPointerException exp) {
             System.out.println("[ERRO] Nenhum jogador selecionado");
@@ -90,10 +92,11 @@ public class Jogo {
             System.out.println("[ERRO]");
         }
     }
-    public static Boolean numeroMagico(int numeroMagico, Scanner s) {
+    public static Boolean descobrirNumeroMagico(int numeroMagico, Scanner s) {
         String stringTentativas = "Tentativas: [********]";
 
         for (byte i = 0; i <= 8; i++){
+            System.out.println("----------------------------------");
             System.out.println(stringTentativas);
             System.out.print  ("Tente acertar o número magico:");
             int resposta = Integer.parseInt(s.nextLine());
@@ -112,6 +115,20 @@ public class Jogo {
 
         System.out.println("Você perdeu");
         return false;
+    }
+    public static int selecionarDificuldadeNM (Scanner s) {
+        System.out.println("Escolha a dificuldade:");
+        System.out.println("1 - difícil   (1 - 100)");
+        System.out.println("2 - médio     (1 - 75)");
+        System.out.println("3 - fácil     (1 - 50)");
+        System.out.print("Digite o número da opção: ");
+        int resposta = Integer.parseInt(s.nextLine());
+        if (resposta < 1 || resposta > 3) {
+            System.out.println("[ERRO] Opção invalida");
+            System.out.println("----------------------------------");
+            return selecionarDificuldadeNM(s);
+        }
+        return  100 - (25 * (resposta - 1));
     }
 
     public static void verNumeroJogadas() {
